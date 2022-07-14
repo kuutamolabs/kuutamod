@@ -25,7 +25,7 @@ kuutamod 0.1.0
 It is also possible to open a shell with development dependencies like this:
 
 ```
-git clone https://github.com/kuutamoaps/kuutamod/
+git clone https://github.com/kuutamolabs/kuutamod/
 cd kuutamod
 nix develop .#
 ```
@@ -45,7 +45,7 @@ Currently we are testing `kuutamod` only on Linux.
 1. Download kuutamod i.e. with [git](https://git-scm.com/downloads)
 
 ```
-git clone https://github.com/kuutamoaps/kuutamod/
+git clone https://github.com/kuutamolabs/kuutamod/
 ```
 
 2. For building, `rustc` and `cargo` are needed depending on the
