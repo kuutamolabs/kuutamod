@@ -18,7 +18,7 @@ echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 3. Build and run kuutamod:
 
 ```
-nix run github:kuutamoaps/kuutamod -- --version
+nix run github:kuutamolabs/kuutamod -- --version
 kuutamod 0.1.0
 ```
 
