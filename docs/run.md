@@ -283,11 +283,11 @@ The module can download this automatically, but for mainnet and testnet you need
 
 ```
 $ nix-shell -p awscli --command 'aws s3 --no-sign-request cp s3://near-protocol-public/backups/testnet/rpc/latest -'
-2022-07-13T11:00:40Z
+2022-07-15T11:00:30Z
 ```
 
 In this case, the full s3 backup URL (to be used in the config below) is  
-`s3://near-protocol-public/backups/testnet/rpc/2022-07-13T11:00:40Z`.
+`s3://near-protocol-public/backups/testnet/rpc/2022-07-15T11:00:30Z`.
 
 **Mainnet**
 
@@ -304,7 +304,7 @@ for now we have hardcoded the `shardnet` node to pull from this backup. As shard
 Create a new file called `kuutamod.nix` next to your `configuration.nix`.
 If your NixOS configuration is managed via a git repository, do not forget to run `git add kuutamod.nix`.
 
-For testnet, add the following configuration to the `kuutamod.nix` file:
+Add the following configuration to the `kuutamod.nix` file:
 
 ```nix
 {
@@ -316,8 +316,9 @@ For testnet, add the following configuration to the `kuutamod.nix` file:
   services.consul.interface.bind = "enp24s0f0";
   services.consul.extraConfig.bootstrap_expect = 1;
 
-  # This is the URL we calculated above:
-  kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/testnet/rpc/2022-07-13T11:00:40Z";
+  # This is the URL we calculated above. Remove/comment out both if on `shardnet`:
+  kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/testnet/rpc/2022-07-15T11:00:30Z";
+  # kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/mainnet/rpc/2022-07-15T11:00:31Z";
 
   # We create these keys after the first 'nixos-rebuild switch'
   # As these files are critical, we also recommend tools like https://github.com/Mic92/sops-nix or https://github.com/ryantm/agenix
