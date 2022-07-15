@@ -5,7 +5,7 @@ makeTest'
   name = "neard";
   nodes.server = { lib, ... }: {
     imports = [
-      ../neard
+      ../neard/mainnet
     ];
   };
 

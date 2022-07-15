@@ -3,7 +3,7 @@ makeTest' {
   name = "single-node-kuutamod";
   nodes.server = { lib, ... }: {
     imports = [
-      ../neard
+      ../neard/mainnet
       ../kuutamod
     ];
 
