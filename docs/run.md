@@ -294,7 +294,8 @@ For `mainnet` replace the word `testnet` in the urls above.
 
 **Stakenet**
 
-For `stakenet` at the time of writing you do not need to find a timestamp, the url to use in the config below is just  
+For `stakenet` at the time of writing backups are not versioned, so for the time being, if deploying on `shardnet` remove this option,
+for now we have hardcoded the `shardnet` node to pull from this backup. As shardnet evolves and alignes this will be updated.   
 ```
 s3://build.openshards.io/stakewars/shardnet/data.tar.gz
 ```
@@ -317,6 +318,7 @@ For testnet, add the following configuration to the `kuutamod.nix` file:
   services.consul.extraConfig.bootstrap_expect = 1;
 
   # This is the URL we calculated above:
+  # kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/mainnet/rpc/2022-07-13T11:00:40Z";
   kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/testnet/rpc/2022-07-13T11:00:40Z";
 
   # We create these keys after the first 'nixos-rebuild switch'
