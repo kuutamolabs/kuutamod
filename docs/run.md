@@ -250,7 +250,7 @@ the nixos modules from it into your configuration.nix.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     # This is the line you need to add.
-    kuutamod.url = "github:kuutamoaps/kuutamod";
+    kuutamod.url = "github:kuutamolabs/kuutamod";
   };
   outputs = { self, nixpkgs, kuutamod }: {
     # Replace 'my-validator' with your hostname here.
@@ -271,17 +271,35 @@ the nixos modules from it into your configuration.nix.
   };
 }
 ```
+---
 
-To bootstrap neard, you need an s3 backup of the chain database.
-The module can download this automatically, but needs a timestamp to do so:
+To bootstrap neard quickly, you can use an s3 backup of the chain database.
+These are available for mainnet, testnet and stakenet:
+
+The module can download this automatically, but for mainnet and testnet you need to specify a timestamp to do so:
+
+**Testnet**
 
 ```
 $ nix-shell -p awscli --command 'aws s3 --no-sign-request cp s3://near-protocol-public/backups/testnet/rpc/latest -'
 2022-07-13T11:00:40Z
 ```
 
-In this case, the full s3 backup URL for testnet is
+In this case, the full s3 backup URL (to be used in the config below) is  
 `s3://near-protocol-public/backups/testnet/rpc/2022-07-13T11:00:40Z`.
+
+**Mainnet**
+
+For `mainnet` replace the word `testnet` in the urls above.
+
+**Stakenet**
+
+For `stakenet` at the time of writing you do not need to find a timestamp, the url to use in the config below is just  
+```
+s3://build.openshards.io/stakewars/shardnet/data.tar.gz
+```
+
+---
 
 Create a new file called `kuutamod.nix` next to your `configuration.nix`.
 If your NixOS configuration is managed via a git repository, do not forget to run `git add kuutamod.nix`.
@@ -338,7 +356,7 @@ To generate these keys. Run the following command but replace
 
 ```
 # we use intentionally the `localnet` here to not having to download genesis files
-$ nix run github:kuutamoaps/kuutamod#neard -- --home /tmp/tmp-near-keys init --chain-id localnet --account-id myawsome.pool.f863973.m0
+$ nix run github:kuutamolabs/kuutamod#neard -- --home /tmp/tmp-near-keys init --chain-id localnet --account-id myawsome.pool.f863973.m0
 warning: Using saved setting for 'extra-substituters = https://cache.garnix.io' from ~/.local/share/nix/trusted-settings.json.
 warning: Using saved setting for 'extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=' from ~/.local/share/nix/trusted-settings.json.
 2022-07-13T10:37:43.778395Z  INFO neard: version="1.27.0" build="nix:1.27.0" latest_protocol=54
