@@ -338,7 +338,7 @@ Import this file in your `configuration.nix`:
 Before we can move on generating validator keys, we need first create the neard user.
 
 ```
-nixos-rebuild --flake /etc/nixos#my-validator
+nixos-rebuild switch --flake /etc/nixos#my-validator
 ```
 
 The first switch will take longer since it blocks on downloading the s3 data backup (around 300GB).
