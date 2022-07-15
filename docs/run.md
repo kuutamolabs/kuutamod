@@ -296,9 +296,6 @@ For `mainnet` replace the word `testnet` in the urls above.
 
 For `stakenet` at the time of writing backups are not versioned, so for the time being, if deploying on `shardnet` remove this option,
 for now we have hardcoded the `shardnet` node to pull from this backup. As shardnet evolves and alignes this will be updated.   
-```
-s3://build.openshards.io/stakewars/shardnet/data.tar.gz
-```
 
 ---
 
