@@ -271,6 +271,7 @@ the nixos modules from it into your configuration.nix.
   };
 }
 ```
+
 ---
 
 To bootstrap neard quickly, you can use an s3 backup of the chain database.
@@ -294,12 +295,11 @@ For `mainnet` replace the word `testnet` in the urls above.
 
 **Stakenet**
 
-For `stakenet` at the time of writing you do not need to find a timestamp, the url to use in the config below is just  
-```
-s3://build.openshards.io/stakewars/shardnet/data.tar.gz
-```
+For `stakenet` at the time of writing backups are not versioned, so for the time being, if deploying on `shardnet` remove this option,
+for now we have hardcoded the `shardnet` node to pull from this backup. As shardnet evolves and alignes this will be updated.   
 
 ---
+
 
 Create a new file called `kuutamod.nix` next to your `configuration.nix`.
 If your NixOS configuration is managed via a git repository, do not forget to run `git add kuutamod.nix`.
