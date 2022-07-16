@@ -1,5 +1,7 @@
 # Lab: Single node kuutamo near validator up on shardnet using AWS.
 
+This lab assumes you have created an account on shardnet. [Challange 1](https://github.com/near/stakewars-iii/blob/main/challenges/001.md)
+
 - Get [NixOS EC2 AMI](https://nixos.org/download.html#nixos-amazon)
   In this demo I used London (eu-west-2): `ami-08f3c1eb533a42ac1` 
 - Setup VM
@@ -52,7 +54,7 @@
 }
 ```
 
-#### Build and switch
+#### Rebuild and switch
 ```console
 $ nixos-rebuild switch --flake /etc/nixos#validator`
 ```
@@ -62,7 +64,48 @@ $ nixos-rebuild switch --flake /etc/nixos#validator`
 ```console
 $ nix run github:kuutamolabs/kuutamod#neard -- --home /tmp/tmp-near-keys init --chain-id shardnet--account-id validator.shardnet.near
 ```
+ 
+#### Install keys:
+ 
+```console
+$ sudo install -o neard -g neard -D -m399 /tmp/tmp-near-keys/validator_key.json /var/lib/secrets/validator_key.json
+$ sudo install -o neard -g neard -D -m399 /tmp/tmp-near-keys/node_key.json /var/lib/secrets/node_key.json
+```
+ 
+If the s2 backup sync was quicker than you generating the key, you might need to
+run `systemctl restart kuutamod` so that it picks up the key. If everything
+went well, you should be able to reach kuutamod's prometheus exporter url:
+
+```
+$ curl http://localhost:2232/metrics
+# HELP kuutamod_state In what state our supervisor statemachine is
+# TYPE kuutamod_state gauge
+kuutamod_state{type="Registering"} -1
+kuutamod_state{type="Shutdown"} -1
+kuutamod_state{type="Startup"} -1
+kuutamod_state{type="Syncing"} 0
+kuutamod_state{type="Validating"} -1
+kuutamod_state{type="Voting"} -1
+# HELP kuutamod_uptime Time in milliseconds how long daemon is running
+# TYPE kuutamod_uptime gauge
+kuutamod_uptime 1273657
+```
+
+Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl`:
+
+```
+$ kuutamoctl active-validator
+Name: river
+```
+
+where `name` is the kuutamo node id.
+
+---
+#### Next Steps
+
+- You can now mount your staking pool [Challange 3](https://github.com/near/stakewars-iii/blob/main/challenges/003.md)
+- You can add more nodes to create an active/passive ha cluster. See [kuutamo GitHub README.md](https://github.com/kuutamolabs/kuutamod/blob/main/README.md) for more information. 
 
 ---
 kuutamolabs  
-[GitHub](https://github.com/kuutamolabs/kuutamod) [Matrix](https://matrix.to/#/#kuutamo-chat:kuutamo.chat)
+[GitHub](https://github.com/kuutamolabs/kuutamod) | [Matrix](https://matrix.to/#/#kuutamo-chat:kuutamo.chat)
