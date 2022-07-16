@@ -58,7 +58,7 @@ This lab assumes you have created an account on shardnet. [Challange 1](https://
 ```console
 $ nixos-rebuild switch --flake /etc/nixos#validator`
 ```
-- Note: Compiling took about (still running at time of writing nearly 2 hours in). @Mic92 can this be reduced?
+- Note: Compiling took about (don't know need to run again to check.) At some point ssh connection is dropped when network services are restarted but this is not obvious to the user.. 
 
 #### Create keys
 ```console
@@ -98,7 +98,7 @@ $ kuutamoctl active-validator
 Name: river
 ```
 
-where `name` is the kuutamo node id.
+where `Name` is the kuutamo node id.
 
 ---
 #### Next Steps
