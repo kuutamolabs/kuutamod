@@ -58,7 +58,7 @@ This lab assumes you have created an account on shardnet. [Challange 1](https://
 ```console
 $ nixos-rebuild switch --flake /etc/nixos#validator`
 ```
-- Note: Compiling took about an hour on this machine.
+- Note: Compiling took about (still running at time of writing nearly 2 hours in). @Mic92 can this be reduced?
 
 #### Create keys
 ```console
