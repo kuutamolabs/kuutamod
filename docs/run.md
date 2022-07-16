@@ -12,7 +12,7 @@ The second part shows how to deploy validator ha setup for
 If you want to get an high-level overview of how kuutamod works, you can also
 read the [Architecture](./architecture.md) page.
 
-## Running in localnet
+## Running a `localnet` cluster for testing and development
 
 This is the easiest way to test kuutamod, which requires the least amount of
 resources as it does not require downloading large amounts of chain data. We
@@ -219,7 +219,7 @@ lrwxrwxrwx   78 joerg 12 Jul 14:54 validator_key.json -> /home/joerg/work/kuutam
 .rw-------  214 joerg 12 Jul 14:54 voter_node_key.json
 ```
 
-## Running in testnet
+## Running on `mainnet`, `testnet, or `stakenet`
 
 ### Single node kuutamod
 
