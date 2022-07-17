@@ -71,7 +71,12 @@ $ nixos-rebuild switch --flake /etc/nixos#validator
 $ sudo install -o neard -g neard -D -m400 /var/lib/neard/voter_node_key.json /var/lib/secrets/node_key.json
 $ sudo install -o neard -g neard -D -m400 /you.shardnet.near.json /var/lib/secrets/validator_key.json
 ```
- 
+You can view logs in the systemd journal
+```console
+$ journalctl -u kuutamod.service -f
+Jul 17 21:43:50 river kuutamod[44389]: 2022-07-17T21:43:50.898176Z  INFO stats: # 1102053 7zgkxdDiKBoqud9DuSC47cwZ94e63BwGj1NNKs93JcLs Validator | 100 validators 29 peers ⬇ 345 kB/s ⬆ 485 kB/s 0.80 bps 0 gas/s CPU: 0%, Mem: 1.77 GB
+```
+
 If the s3 backup sync was quicker than you generating the key, you might need to
 run `systemctl restart kuutamod` so that it picks up the key. If everything
 went well, you should be able to reach kuutamod's prometheus exporter url:
@@ -97,12 +102,6 @@ $ kuutamoctl active-validator
 Name: river
 ```
 where `Name` is the kuutamo node id.
-
-You can view logs in the systemd journal
-```console
-$ journalctl -u kuutamod.service -f
-Jul 17 21:43:50 river kuutamod[44389]: 2022-07-17T21:43:50.898176Z  INFO stats: # 1102053 7zgkxdDiKBoqud9DuSC47cwZ94e63BwGj1NNKs93JcLs Validator | 100 validators 29 peers ⬇ 345 kB/s ⬆ 485 kB/s 0.80 bps 0 gas/s CPU: 0%, Mem: 1.77 GB
-```
 
 ---
 #### Next Steps
