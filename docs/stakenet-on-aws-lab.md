@@ -77,18 +77,18 @@ run `systemctl restart kuutamod` so that it picks up the key. If everything
 went well, you should be able to reach kuutamod's prometheus exporter url:
 
 ```
-$ curl http://localhost:2232/metrics
+$ curl http://localhost:2233/metrics
 # HELP kuutamod_state In what state our supervisor statemachine is
 # TYPE kuutamod_state gauge
-kuutamod_state{type="Registering"} -1
-kuutamod_state{type="Shutdown"} -1
-kuutamod_state{type="Startup"} -1
-kuutamod_state{type="Syncing"} 0
-kuutamod_state{type="Validating"} -1
-kuutamod_state{type="Voting"} -1
+kuutamod_state{type="Registering"} 0
+kuutamod_state{type="Shutdown"} 0
+kuutamod_state{type="Startup"} 0
+kuutamod_state{type="Syncing"} 1
+kuutamod_state{type="Validating"} 0
+kuutamod_state{type="Voting"} 0
 # HELP kuutamod_uptime Time in milliseconds how long daemon is running
 # TYPE kuutamod_uptime gauge
-kuutamod_uptime 1273657
+kuutamod_uptime 3447978
 ```
 
 Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl`:
