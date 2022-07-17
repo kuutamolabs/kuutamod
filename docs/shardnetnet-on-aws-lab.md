@@ -92,13 +92,17 @@ kuutamod_uptime 3447978
 ```
 
 Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl`:
-
-```
+```console
 $ kuutamoctl active-validator
 Name: river
 ```
-
 where `Name` is the kuutamo node id.
+
+You can view logs in the systemd journal
+```console
+$ journalctl -u kuutamod.service -f
+Jul 17 21:43:50 river kuutamod[44389]: 2022-07-17T21:43:50.898176Z  INFO stats: # 1102053 7zgkxdDiKBoqud9DuSC47cwZ94e63BwGj1NNKs93JcLs Validator | 100 validators 29 peers ⬇ 345 kB/s ⬆ 485 kB/s 0.80 bps 0 gas/s CPU: 0%, Mem: 1.77 GB
+```
 
 ---
 #### Next Steps
