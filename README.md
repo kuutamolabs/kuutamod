@@ -33,3 +33,7 @@ change significantly.
   - [Configuration](docs/configuration.md)
 - [Architecture](docs/architecture.md)
   - [Failover algorithm](docs/failover-algorithm.md)
+
+---
+kuutamolabs  
+[GitHub](https://github.com/kuutamolabs/kuutamod) | [Matrix](https://matrix.to/#/#kuutamo-chat:kuutamo.chat)
