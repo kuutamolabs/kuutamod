@@ -63,7 +63,7 @@ $ nixos-rebuild switch --flake /etc/nixos#validator
 
 1. Follow [instructions to create wallet and install near-cli](https://github.com/near/stakewars-iii/blob/main/challenges/001.md) 
 2. Follow instructions to [generate keys](https://github.com/near/stakewars-iii/blob/main/challenges/002.md#activating-the-node-as-validator)
-3. Copy key to validator.
+3. Copy key to validator
 
 #### Install keys
  
