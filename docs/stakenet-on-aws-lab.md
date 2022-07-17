@@ -5,7 +5,7 @@ This lab assumes you have created an account on shardnet. [Challange 1](https://
 - Get [NixOS EC2 AMI](https://nixos.org/download.html#nixos-amazon)
   In this demo I used London (eu-west-2): `ami-08f3c1eb533a42ac1` 
 - Setup VM
-  AWS > EC2 > AMIs > `ami-08f3c1eb533a42ac1` > Launch instance from AMI > c5a.xlarge (I guess c5ad no available in London), 500GIB gp3 > Launch instance
+  AWS > EC2 > AMIs > `ami-08f3c1eb533a42ac1` > Launch instance from AMI > For this demo I used: c5a.xlarge, 500GIB gp3 > Launch instance
 - SSH to instance
 
 #### Edit `configuration.nix` so it is as below: `nano /etc/nixos/configuration.nix`
@@ -54,25 +54,25 @@ This lab assumes you have created an account on shardnet. [Challange 1](https://
 }
 ```
 
-#### Rebuild and switch
+#### Rebuild and switch to new configuration
 ```console
-$ nixos-rebuild switch --flake /etc/nixos#validator`
+$ nixos-rebuild switch --flake /etc/nixos#validator
 ```
-- Note: Compiling took about (don't know need to run again to check.) At some point ssh connection is dropped when network services are restarted but this is not obvious to the user.. 
 
 #### Create keys
+
+1. Follow [instructions to create wallet and install near-cli](https://github.com/near/stakewars-iii/blob/main/challenges/001.md) 
+2. Follow instructions to [generate keys](https://github.com/near/stakewars-iii/blob/main/challenges/002.md#activating-the-node-as-validator)
+3. SCP key to validator.
+
+#### Install keys
+ 
 ```console
-$ nix run github:kuutamolabs/kuutamod#neard -- --home /tmp/tmp-near-keys init --chain-id shardnet--account-id validator.shardnet.near
+$ sudo install -o neard -g neard -D -m400 /var/lib/neard/voter_node_key.json /var/lib/secrets/node_key.json
+$ sudo install -o neard -g neard -D -m400 /you.shardnet.near.json /var/lib/secrets/validator_key.json
 ```
  
-#### Install keys:
- 
-```console
-$ sudo install -o neard -g neard -D -m399 /tmp/tmp-near-keys/validator_key.json /var/lib/secrets/validator_key.json
-$ sudo install -o neard -g neard -D -m399 /tmp/tmp-near-keys/node_key.json /var/lib/secrets/node_key.json
-```
- 
-If the s2 backup sync was quicker than you generating the key, you might need to
+If the s3 backup sync was quicker than you generating the key, you might need to
 run `systemctl restart kuutamod` so that it picks up the key. If everything
 went well, you should be able to reach kuutamod's prometheus exporter url:
 
